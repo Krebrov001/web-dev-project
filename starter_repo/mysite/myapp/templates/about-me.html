@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- It actually works! -->
+{% block css %}
+<style type="text/css">
+  .article-title {
+      font-family: Arial, Verdana, Helvetica;
+      color: black;
+      font-weight: bold;
+      font-size: 150%;
+  }
+
+
+// https://foundation.zurb.com/building-blocks/blocks/button-like.html
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
+}
+
+
+
+  textarea,
+  textarea:disabled,
+  textarea[readonly] {
+    border: 5px solid white;
+    opacity: 0.5;
+    color: black;
+    font-weight: bolder;
+    font-family: courier, monospace;
+    cursor: text;
+    resize: vertical;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  /* The user can expand the textarea and/or scroll to see more code inside. */
+  textarea[readonly] {
+    min-height: 100px;
+  }
+
+  textarea:hover,
+  textarea[readonly]:hover {
+    background-color: Lavender;
+  }
+
+  .button {
+      font-family: courier, monospace;
+      font-weight: bold;
+      color: white;
+  }
+
+  .inner_article {
+     background-color:  #cce6ff;
+     padding: 15px;
+     //opacity: 0.8;
+   }
+
+    /*
+   .inn_article {
+     background-color: blue;
+   }
+   */
+
+   .page_filler {
+     width: 100%;
+     height: 100%;
+     margin-left: auto;
+     margin-right: auto;
+     max-width: initial;
+     min-height:100vh;
+   }
+
+   .response_class {
+     margin: 20px;
+     padding: 10px;
+     border: 5px solid black;
+     border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background-color: cyan;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="grid-x grid-margin-x whole_page">
+
+      <!-- Top whitespace. -->
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+      <!-- "This is my website" text. -->
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+        <h3 style="text-align: center;"><b>This is my website</b></h3>
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+
+      <!-- My picture. -->
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+        <div class="grid-x grid-margin-x">
+
+          <div class="cell small-0 medium-3 large-4"></div>
+          <div class="cell small-12 medium-6 large-4">
+            <img src="{% static "images/my_picture.jpg" %}" alt="Konstantin's photo" title="Software Engineer">
+          </div>
+          <div class="cell small-0 medium-3 large-4"></div>
+
+        </div>
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+
+      <!-- Programmer Ipsum -->
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+        <p>This is Programmer Ipsum. Should be replaced with a real description of this website soon.</p>
+
+        <p> // This should not work but it does, if you touch it I will be upset. Please stop changing my variables. Given enough time, I can meet any software deadline. Pass the array size in C. if, elsif, else, while, do-while, for. </p>
+
+        <p> try, catch, finally. Syntactic sugar. If at first you don't succeed, call it version 1.0. // I'll fix this later. Push() and Pop(). CSS Grid is the bees knees. Ruby on Rails. </p>
+
+        <p> System.out.println("Hello World!"); In order to understand recursion, one must first understand recursion. Ethernet always wins. Given enough time, I can meet any software deadline. A computer program does what you tell it to do, not what you want it to do. Byte, short, int, long, float, double. </p>
+
+        <p> Google, Amazon, Facebook, Apple. CS is theory, not learning how to program. Unit test your methods. Real Programmers use C since it's the easiest language to spell. Unit test your methods. Byte, short, int, long, float, double. </p>
+
+        <p> Let's start array indexes at 0.5. Two programmers walk into a foo. Albeit an archaic language, C is still relevant for systems programming. Most iconic duo: Kernighan and Ritchie. // Below here there be dragons. How many Javascript frameworks are there? </p>
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+<!-- my -->

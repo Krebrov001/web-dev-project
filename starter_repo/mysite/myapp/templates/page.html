@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- It actually works! -->
+{% block css %}
+<style type="text/css">
+  body {
+    background-image: url("{% static "images/outer_space.jpg" %}");
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  textarea,
+  textarea:disabled,
+  textarea[readonly] {
+    border: 5px solid white;
+    opacity: 0.5;
+    color: black;
+    font-weight: bolder;
+    font-family: courier, monospace;
+    cursor: text;
+    resize: vertical;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  textarea:hover,
+  textarea[readonly]:hover {
+    background-color: cyan;
+  }
+
+  /* This is Foundation's button class. */
+  .button {
+    color: cyan;
+    background-color: purple;
+    font-weight: bold;
+    font-family: courier, monospace;
+  }
+
+  .button:hover {
+    color: purple;
+    background-color: cyan;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+    <br />
+    
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-2 medium-4 large-5"></div>
+      <div class="button cell small-8 medium-4 large-2">{{ logo_text }}</div>
+      <div class="cell small-2 medium-4 large-5"></div>
+    </div>
+
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-0 medium-2 large-3"></div>
+      <!-- Include any code file using Django templates! -->
+      <textarea readonly rows="20", cols="10", class="cell small-12 medium-8 large-6",>
+      {% block code_file %}
+      {% endblock %}
+      </textarea>
+      <div class="cell small-0 medium-2 large-3"></div>
+    </div>
+{% endblock %}

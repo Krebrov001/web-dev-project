@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- It actually works! -->
+{% block css %}
+<style type="text/css">
+  textarea,
+  textarea:disabled,
+  textarea[readonly] {
+    border: 5px solid white;
+    opacity: 0.5;
+    color: black;
+    font-weight: bolder;
+    font-family: courier, monospace;
+    cursor: text;
+    resize: vertical;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  /* The user can expand the textarea and/or scroll to see more code inside. */
+  textarea[readonly] {
+    min-height: 100px;
+  }
+
+  textarea:hover,
+  textarea[readonly]:hover {
+    background-color: Lavender;
+  }
+
+  .button {
+      font-family: courier, monospace;
+      font-weight: bold;
+      color: white;
+  }
+
+  .inner_article {
+     background-color:  #cce6ff;
+     padding: 15px;
+     //opacity: 0.8;
+   }
+
+    /*
+   .inn_article {
+     background-color: blue;
+   }
+   */
+
+   .page_filler {
+     width: 100%;
+     height: 100%;
+     margin-left: auto;
+     margin-right: auto;
+     max-width: initial;
+     min-height:100vh;
+   }
+
+   .response_class {
+     margin: 20px;
+     padding: 10px;
+     border: 5px solid black;
+     border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background-color: cyan;
+    }
+
+    .article-card {
+        background-color: #ccddff;
+        border: 4px solid #9999ff;
+        width: 100%;
+    }
+
+    .article-card:hover {
+        background-color: #cce6ff;
+        border-color: #99ccff;
+    }
+
+    .article-header {
+        background-color: #9999ff;
+        padding: 4px;
+    }
+
+    .article-header:hover {
+        background-color: #99ccff;
+    }
+
+    .article-header p {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .article-title>a {
+        font-family: Arial, Verdana, Helvetica;
+        font-size: 100%;
+        color: Aqua;
+        font-weight: bold;
+    }
+
+    .article-title>a:hover {
+        color: #ccffff;
+        text-decoration: underline;
+    }
+
+    .pagination-circular {
+        width: 100%;
+        text-align: center;
+    }
+
+    // https://foundation.zurb.com/building-blocks/blocks/pagination-circular.html
+
+
+.pagination-circular li.current {
+  border: 1px solid #1779ba;
+  border-radius: 5000px;
+  padding: 0.285em 0.8em;
+  font-size: 18px;
+}
+
+.pagination-circular li.disabled {
+  border: 1px solid #cacaca;
+  padding: 0.285em 0.8em;
+  border-radius: 5000px;
+  font-size: 18px;
+}
+
+.pagination-circular a {
+  border-radius: 5000px;
+  padding: 0.285em 0.8em;
+  border: 1px solid #1779ba;
+  font-size: 18px;
+}
+
+.pagination-circular li:not(.disabled):hover a {
+  background: #1779ba;
+  color: #fefefe;
+}
+
+.pagination-circular li a {
+  transition: background 0.15s ease-in, color 0.15s ease-in;
+}
+
+
+.pagination-circular li.this-page a {
+  background-color: DarkTurquoise;
+  color: #fefefe;
+}
+
+.pagination-circular li.this-page a:hover {
+  background-color: DarkTurquoise;
+  color: #fefefe;
+}
+
+.hide-me {
+    display: none !important;
+}
+
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="grid-x grid-margin-x whole_page">
+
+       <div class="cell small-0 medium-1 large-2"></div>
+       <div class="cell small-12 medium-10 large-8 inner_article">
+
+           <!-- This is the grid inside the inner_article
+                which is responsible for aligning the form in the middle of the page.
+           -->
+           <div class="grid-x grid-margin-x">
+           <div class="cell small-0 medium-2 large-3"></div>
+             <div class="cell small-12 medium-8 large-6">
+               <form action="/register/" method="post">
+                  {% csrf_token %}
+                  <h4 class="text-center">Register</h4>
+                  {{ form.errors }}
+                  {{ form.username.label_tag }}
+                  {{ form.username }}
+                  <p>Your username can be different than your real name.</p>
+                  {{ form.first_name.label_tag }}
+                  {{ form.first_name }}
+                  {{ form.last_name.label_tag }}
+                  {{ form.last_name }}
+                  {{ form.email.label_tag }}
+                  {{ form.email }}
+                  {{ form.password1.label_tag }}
+                  {{ form.password1 }}
+                  {{ form.password2.label_tag }}
+                  {{ form.password2 }}
+               <input type="submit" class="button expanded" value="Register" />
+             </div>
+           <div class="cell small-0 medium-2 large-3"></div>
+         </div>
+
+       </div>
+       <div class="cell small-0 medium-1 large-2"></div>
+
+       <div class="cell small-0 medium-1 large-2"></div>
+       <div class="cell small-12 medium-10 large-8 inner_article"></div>
+       <div class="cell small-0 medium-1 large-2"></div>
+       <div class="cell small-0 medium-1 large-2"></div>
+       <div class="cell small-12 medium-10 large-8 inner_article"></div>
+       <div class="cell small-0 medium-1 large-2"></div>
+
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}
+
+<!-- my -->

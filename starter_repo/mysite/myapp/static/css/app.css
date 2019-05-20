@@ -1,0 +1,78 @@
+
+  body {
+    background-color:  #d9ccff;
+    background-image: url("{% static "images/circuits_seamless.png" %}");
+    background-repeat: repeat;
+    background-attachment: fixed;
+  }
+
+  .top-bar {
+      padding: 0px;
+      background-color: #d9ccff;
+  }
+
+  .top-text-bar {
+      background-color:  #9999ff;
+      width: 100%;
+   }
+
+   .title-text {
+      font-family: courier, Courier New, monospace;
+      font-weight: bold;
+      font-size: 70%;
+      color: Aqua;
+      text-decoration: none;
+      padding-top: 10px;
+      padding-bottom: 15px;
+      padding-left: 40px;
+      padding-right: 15px;
+   }
+
+   .title-text:hover {
+       color: Cyan;
+       text-decoration: underline;
+   }
+   .title-text:visited {
+       color: Aqua;
+       text-decoration: none;
+    }
+
+    medium-horizontal {
+        width:100%;
+        background-color: blue;
+    }
+
+    #top-navigation-list {
+         background-color: #d9ccff;
+         padding-left: auto;
+         padding-right: auto;
+         width:100%;
+    }
+
+    .nav-item {
+        background-color: #9999ff;
+        border: 4px solid #9999ff;
+        margin: 5px auto 5px auto;
+        padding: 5px auto 5px auto;
+    }
+
+    .nav-item:hover {
+        border-color: cyan;
+    }
+
+    .nav-item span {
+        font-family: Arial, Verdana, Helvetica;
+        font-size: 125%;
+        color: Aqua;
+        font-weight: bold;
+    }
+
+    .nav-item span:hover {
+        color: Cyan;
+    }
+
+    .divider-line {
+        width: 100%;
+        height: 5px;
+        background-color: #9999ff;
+    }

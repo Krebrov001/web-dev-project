@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- It actually works! -->
+{% block css %}
+<style type="text/css">
+  .article-title {
+      font-family: Arial, Verdana, Helvetica;
+      color: black;
+      font-weight: bold;
+      font-size: 150%;
+  }
+
+
+// https://foundation.zurb.com/building-blocks/blocks/button-like.html
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
+}
+
+
+
+  textarea,
+  textarea:disabled,
+  textarea[readonly] {
+    border: 5px solid white;
+    opacity: 0.5;
+    color: black;
+    font-weight: bolder;
+    font-family: courier, monospace;
+    cursor: text;
+    resize: vertical;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  /* The user can expand the textarea and/or scroll to see more code inside. */
+  textarea[readonly] {
+    min-height: 100px;
+  }
+
+  textarea:hover,
+  textarea[readonly]:hover {
+    background-color: Lavender;
+  }
+
+  .button {
+      font-family: courier, monospace;
+      font-weight: bold;
+      color: white;
+  }
+
+  .inner_article {
+     background-color:  #cce6ff;
+     padding: 15px;
+     //opacity: 0.8;
+   }
+
+    /*
+   .inn_article {
+     background-color: blue;
+   }
+   */
+
+   .page_filler {
+     width: 100%;
+     height: 100%;
+     margin-left: auto;
+     margin-right: auto;
+     max-width: initial;
+     min-height:100vh;
+   }
+
+   .response_class {
+     margin: 20px;
+     padding: 10px;
+     border: 5px solid black;
+     border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background-color: cyan;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="grid-x grid-margin-x whole_page">
+
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+        <h1><b>Error: This page was not found.</b></h1>
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+            <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+            <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+            <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+<!-- my -->

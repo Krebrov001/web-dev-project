@@ -1,0 +1,188 @@
+{% extends "article.html" %}
+{% load static %}
+
+<!-- TODO: Add inline code styles, bold text, and italicized text.
+     Refer to the LinkedIn article to see how you did it. -->
+
+
+{% block article %}
+<p>
+Can an object modify another object of the same class type? For example imagine
+ that a class has some private data members. We create two objects of that class type.
+  How can one object modify the other object? Is is legal to do so?
+</p>
+
+<p>
+Can we write a member function which gives an object the ability to modify another
+ object of the same class type? This could be useful if an object represents a fighter
+  in a video game, and you want to give one fighter the ability to wound another one.
+</p>
+
+<p>
+Turns out that it's possible to do this in C++. We want to understand why C++ gives
+ us the ability to do this. Do do so, we must first understand what a member function
+ actually is and how it works.
+</p>
+
+<p>
+Here we have a class Bucket with two private data members. There is also a constructor,
+ a copy constructor, and some other functions. Let us turn our attention to modifyOther
+ function. It takes a single parameter, which is a pointer to a Bucket object.
+ Then that member function can edit that other Bucket object.
+</p>
+
+<textarea readonly>
+#include <iostream>
+using namespace std;
+
+class Bucket {
+  public:
+    // Acts as constructor acceptint two arguments x and y,
+    // one argument x,
+    // or no arguments (default constructor).
+    Bucket(int x = 0, int y = 0) : x(x), y(y) {}
+
+    Bucket(const Bucket& rhs)
+    {
+        this->x = rhs.x;
+        this->y = rhs.y;
+    }
+
+    void modifyOther(Bucket* other)
+    {
+        other->x = -1;
+        other->y = 1;
+    }
+
+    void printInfo()
+    {
+        cout << "x = " << this->x << endl;
+        cout << "y = " << this->y << endl;
+        cout << endl;
+    }
+  private:
+    int x;
+    int y;
+};
+
+
+int main()
+{
+    Bucket a(10, 5);
+    a.printInfo();
+
+    Bucket b(8, 9);
+    b.printInfo();
+
+    a.modifyOther(&b);
+
+    a.printInfo();
+    b.printInfo();
+
+    return 0;
+}
+</textarea>
+
+<p>
+In the main() function, we are declaring two objects of class Base type. Notice
+ that they are the same data type. That is important. Then we call object a's
+ modifyOther function to successfully modify the internal private data members
+ of object b.
+</p>
+
+<p>
+Here is the output of this code:
+</p>
+
+<textarea readonly>
+x = 10
+y = 5
+
+x = 8
+y = 9
+
+x = 10
+y = 5
+
+x = -1
+y = 1
+
+</textarea>
+
+<p>
+Now you may be thinking, shouldn't this be illegal? Aren't private data members
+ only allowed to be accessed by the object itself? It turns out that the member
+ access specifiers like private and public are enforced by the compiler, and the
+ compiler has no concept of individual objects, only classes.
+</p>
+
+<p>
+private data members are allowed to be accessed by anything inside of their class,
+ allowed to be accessed by the class's member functions. Since modifyOther is a
+ member function of type class Base, it can access the private variables int x
+ and int y and change them. Hence no rule is being violated here.
+</p>
+
+<p>
+What is a member function? It is simply a stand alone function which takes an
+ "invisible" pointer to the calling object, and it accesses the object through
+ that pointer. That pointer is called this. Look at the printInfo function.
+ Although it is not required syntax, there is a reason why I used this->y to indicate
+ the member variables. Because all member functions take an "invisible" this pointer
+ to the calling object, the function actually looks like:
+</p>
+
+<textarea readonly>
+void printInfo(Bucket* this)
+{
+    cout << "x = " << this->x << endl;
+    cout << "y = " << this->y << endl;
+    cout << endl;
+    // this->x = -1;
+}
+</textarea>
+
+<p>
+Notice that I added the last extra line to this function on purpose. Compare the
+ definition of printInfo function to modifyOther function. They look very similar.
+ In fact the only difference is the name of the Bucket* parameter! Bucket* this
+ is the implicit pointer to the calling object. Bucket* other is just a pointer
+ to some other Bucket object. The compiler is "dumb", it can't tell the difference
+ between these two Bucket *s based on their names alone. It treats them the same!
+ So we can conclude that the same mechanism that is used to modify the calling object
+ can also be used to modify another object of the same class type.
+</p>
+
+<p>
+Keep in mind that we cannot use the same trick to pass in a pointer to an object
+ of another class type and modify it. That will not work. A member function has
+ access only to variables that are in the same class! private means that the variable
+ can only be modified by member functions of that particular class, not any other ones.
+ A private variable cannot be modified by the outside world, so the outside world
+ also includes any member functions of different classes.
+</p>
+
+<p>
+Now why do you think the compiler allows objects of the same data type to access
+ each other's members? This is actually an intentional language feature. It allows
+ us to write copy constructors, overloaded assignment operator =, and overloaded
+ comparison operators. Such functions have to be able to access the private data
+ members of the other object. I've implemented the copy constructor of the class Bucket
+ to take a reference parameter: const Bucket& rhs. However, I could also implement
+ it using a pointer:
+</p>
+
+<textarea readonly>
+    Bucket(Bucket* rhs)
+    {
+        this->x = rhs->x;
+        this->y = rhs->y;
+    }
+</textarea>
+
+<p>
+So that's how and why one object can access the internal data members of another
+ object through a function. Please like this article if it was useful for your
+ understanding.
+</p>
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- It actually works! -->
+{% block css %}
+<style type="text/css">
+  .article-title {
+      font-family: Arial, Verdana, Helvetica;
+      color: black;
+      font-weight: bold;
+      font-size: 150%;
+  }
+
+
+// https://foundation.zurb.com/building-blocks/blocks/button-like.html
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
+}
+
+.button-like span {
+  margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
+}
+
+.button-like:focus {
+  background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
+}
+
+
+
+  textarea,
+  textarea:disabled,
+  textarea[readonly] {
+    border: 5px solid white;
+    opacity: 0.5;
+    color: black;
+    font-weight: bolder;
+    font-family: courier, monospace;
+    cursor: text;
+    resize: vertical;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+  }
+
+  /* The user can expand the textarea and/or scroll to see more code inside. */
+  textarea[readonly] {
+    min-height: 100px;
+  }
+
+  textarea:hover,
+  textarea[readonly]:hover {
+    background-color: Lavender;
+  }
+
+  .button {
+      font-family: courier, monospace;
+      font-weight: bold;
+      color: white;
+  }
+
+  .inner_article {
+     background-color:  #cce6ff;
+     padding: 15px;
+     //opacity: 0.8;
+   }
+
+    /*
+   .inn_article {
+     background-color: blue;
+   }
+   */
+
+   .chat_instance {
+        font-family: Arial, monospace;
+        border: 5px solid black;
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        background-color: #9999ff;
+        text-indent: 15px;
+        padding: 8px;
+        margin: 4px;
+    }
+
+    .chat_instance:hover {
+        border: 5px solid black;
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        background-color: #99ccff;
+        text-indent: 20px;
+        font-style: italic;
+        padding: 8px;
+        margin: 4px;
+    }
+
+   .page_filler {
+     width: 100%;
+     height: 100%;
+     margin-left: auto;
+     margin-right: auto;
+     max-width: initial;
+     min-height:100vh;
+   }
+
+   .response_class {
+     margin: 20px;
+     padding: 10px;
+     border: 5px solid black;
+     border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    background-color: cyan;
+    }
+
+    .chat-posts-hidden {
+        display: none;
+        margin: 0px;
+        padding: 0px
+    }
+
+    .chat-posts-seen {
+        display: block;
+        margin: 0px;
+        padding: 0px
+    }
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="grid-x grid-margin-x whole_page">
+
+      <!-- Top whitespace. -->
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+
+      <div class="cell small-0 medium-1 large-2"></div>
+      <div class="cell small-12 medium-10 large-8 inner_article">
+        <h4 style="text-align: center;">Click on a chat instance to see it's chat posts.</h4>
+        {% for ChatInstanceWithPosts in complete_chats_list %}
+          <div class="chat_instance"
+          onClick = "this.nextElementSibling.className = 'grid-x grid-margin-x chat-posts-seen';">
+            <h5>
+              {{ ChatInstanceWithPosts.response.id }} "{{ ChatInstanceWithPosts.response.chat_name }}" {{ ChatInstanceWithPosts.response.chat_date }}
+            </h5>
+          </div>
+
+          <div class="grid-x grid-margin-x chat-posts-hidden">
+            {% for chat_post in ChatInstanceWithPosts.my_comments %}
+              <div class="cell small-10 medium-9 large-8 small-offset-2 medium-offset-3 large-offset-4">
+                <!-- Reuse the response_class CSS style for chat posts. -->
+                <div class="response_class">
+                  <p> {{ chat_post.author_name }} on {{ chat_post.chat_date }} </p>
+                  <p class="response_content">
+                    {{ chat_post.chat_content }}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <br />
+
+        {% endfor %}
+      </div>
+      <div class="cell small-0 medium-1 large-2"></div>
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  var code_delimiter = "```";
+
+  // all_responses is a NodeList of all <p> response tags.
+  var all_responses = document.getElementsByClassName("response_content");
+  // Always cache the lengths for improved efficiency.
+  var num_responses = all_responses.length;
+
+  for (var i = 0; i < num_responses; ++i) {
+      // current_response is a <p> node containing the text of the response.
+      var current_response = all_responses[i];
+      // The text of the response as a string.
+      var response_text = current_response.firstChild.nodeValue;
+      // The number of characters in the response_text string.
+      var num_chars = response_text.length;
+
+      // The number of code_delimiters in the response text.
+      var num_delimiters = 0;
+      // The index into the code_delimiter string.
+      var index1 = 0;
+
+      // This loop counts the number of code_delimiters "```".
+      for (var j = 0; j < num_chars; ++j) {
+          if (code_delimiter[index1] == response_text[j]) {
+              // The current character matches.
+              ++index1;
+          } else {
+              // No match.
+              index1 = 0;
+          }
+
+          // All 3 characters of "```'" matched.
+          // We found a code delimiter!
+          if (index1 == 3) {
+              ++num_delimiters;
+              index1 = 0;
+          }
+      }
+
+      // If you are replacing a value (and not a regular expression),
+      // only the first instance of the value will be replaced in the string.
+      // replace() returns us a new string, so we have to reassign the returned
+      // string to the response_text string to apply the changes.
+      // This makes it replace each code delimiter in ordered sequence.
+      for (var j = 0; j < num_delimiters; ++j) {
+          // delimits start of code
+          if (j % 2 == 0) {
+              response_text = response_text.replace("```", "<textarea readonly>");
+          // delimits end of code
+          } else {
+              response_text = response_text.replace("```", "</textarea>");
+          }
+      }
+
+      // The text on the webpage comes from the model in the database.
+      // Before coming into the database, data from the user has to go through
+      // a custom form validator which ensures that there will always be an
+      // even number of code delimiters, or in other words, for every opening
+      // code delimiter there will always be a closing code delimiter.
+
+      // Save the modified response_text string into the actual <p> node.
+      current_response.innerHTML = response_text;
+  }
+</script>
+{% endblock %}
+
+<!-- my -->

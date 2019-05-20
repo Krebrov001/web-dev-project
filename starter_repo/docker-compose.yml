@@ -1,0 +1,45 @@
+#adapted from example in docker documentation
+version: "3"
+
+services:
+  web:
+    build: .
+    volumes:
+       - .:/code
+    ports:
+       - 8000:8000
+    #expose:
+    #  - 8000  
+    links:
+      - redis:redis
+    command: python /code/mysite/manage.py runserver 0.0.0.0:8000
+
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+      - "6379"
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    depends_on:
+      - web
+      - channels
+    ports:
+      - "80:80"
+    #  - "443:443"
+#     volumes:
+#        - ./mysite/myapp/static:/static
+    links:
+      - web:web
+
+  channels:
+    build: .
+    command: daphne -b 0.0.0.0 -p 8001 django_channels.asgi:channel_layer
+    volumes:
+      - .:/code
+    ports:
+      - "8001:8001"
+    links:
+      - redis

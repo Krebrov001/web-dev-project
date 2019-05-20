@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>  <!-- HTML5 -->
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+    <link rel="stylesheet" href="{% static "css/app.css" %}">
+    <style type="text/css">
+      body {
+        background-color:  #d9ccff;
+        background-image: url("{% static "images/circuits_seamless.png" %}");
+        background-repeat: repeat;
+        background-attachment: fixed;
+      }
+    </style>
+    {% block css %}
+    {% endblock %}
+  </head>
+  <body>
+    <!-- This is the top website bar -->
+    <nav class="top-bar" data-topbar role="navigation">
+      <div class="top-text-bar">
+        <h1><a href="/" class="title-text">const Programmer</a></h1>
+      </div>
+    </nav>
+
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="vertical medium-horizontal menu" id="top-navigation-list">
+        <li class="nav-item"><a href="/" ><i class="fi-list"></i> <span>Articles</span></a></li>
+        <li class="nav-item"><a href="/contact-me/"><i class="fi-list"></i> <span>Contact Me</span></a></li>
+        <li class="nav-item"><a href="/programmer-chat/"><i class="fi-list"></i> <span>Programmer Chat</span></a></li>
+        <li class="nav-item"><a href="/not-found/"><i class="fi-list"></i> <span>My Codes</span></a></li>
+        <li class="nav-item"><a href="/about-me/"><i class="fi-list"></i> <span>About</span></a></li>
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a href="/logout/"><i class="fi-list"></i> <span>User Logout</span></a></li>
+        {% else %}
+        <li class="nav-item"><a href="/log-in/"><i class="fi-list"></i> <span>User Login</span></a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <div class="divider-line">
+    </div>
+    <!-- Top website bar ends here. -->
+
+  {% block content %}
+  {% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="{% static "js/vendor/jquery.js" %}"></script>
+  <script src="{% static "js/vendor/what-input.js" %}"></script>
+  <script src="{% static "js/vendor/foundation.js" %}"></script>
+  <script src="{% static "js/app.js" %}"></script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>
+
+<!-- my -->
