@@ -28,9 +28,9 @@ services:
       - channels
     ports:
       - "80:80"
-    #  - "443:443"
-#     volumes:
-#        - ./mysite/myapp/static:/static
+      - "443:443"
+    volumes:
+      - ./mysite/myapp/static:/static
     links:
       - web:web
 
